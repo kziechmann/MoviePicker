@@ -1,1 +1,1 @@
-![Wireframe of MoviePicker](https://github.com/kziechmann/MoviePicker/images/PickMovie.jpg)
+![Wireframe of MoviePicker](https://github.com/kziechmann/MoviePicker/blob/master/Images/PickMovie.jpg)

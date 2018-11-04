@@ -10,17 +10,33 @@ h1 {
    font-family: 'Phosphate', sans-serif;
    color: white;
    font-size: 100px;
-   text-shadow: 5px 5px 4px #6b180e;
+   text-shadow: 5px 5px 4px #B82000;
 
 }
 
-button {
+.go {
+   margin: 1%;
+   background-color: #B82000;
+   color: white;
+   padding-right: 10px;
+   padding-left: 10px;
+   border-radius: 50px;
+   font-size: 2rem;
+   font-family: 'Phosphate', sans-serif;
+}
+
+.genre {
    margin: 1%;
    background-color: Transparent;
    color: white;
    padding-right: 20px;
    padding-left: 20px;
    border-radius: 50px;
+   font-size: 1.25rem;
+}
+
+.mt-0 {
+  margin-top: 0px;
 }
 
 .mt-1 {
@@ -31,6 +47,10 @@ button {
 }
 .mt-3 {
   margin-top: 50px;
+}
+
+.mb-0 {
+  margin-bottom: -30px;
 }
 
 .mb-1 {

@@ -15,45 +15,65 @@
   </head>
   <body>
     <div class= "text-center">
-      <button> <h1> Pick Movie </h1> </button>
+      <h1> Pick Movie </h1>
+      <button type="button" class="go">GO!</button>
     </div>
     <div class="container text-center" id= "button container">
       <div class="row">
         <div class="col-md-12 ">
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
+          <button type="button" class="genre">ACTION</button>
+          <button type="button" class="genre">ADVENTURE</button>
+          <button type="button" class="genre">ANIMATION</button>
+          <button type="button" class="genre">COMEDY</button>
+          <button type="button" class="genre">CRIME</button>
+          <button type="button" class="genre">DOCUMENTARY</button>
+          <button type="button" class="genre">DRAMA</button>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12 ">
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
-          <button type="button">Genre</button>
+          <button type="button" class="genre">FAMILY</button>
+          <button type="button" class="genre">FANTASY</button>
+          <button type="button" class="genre">HORROR</button>
+          <button type="button" class="genre">THRILLER</button>
+          <button type="button" class="genre">ROMANCE</button>
+          <button type="button" class="genre">SCI-FI</button>
+          <button type="button" class="genre">SUPER HERO</button>
         </div>
       </div>
     </div>
     <div class="container bg-transluscent text-center">
       <div class="row">
-        <div class="col-md-4 mt-2 mb-2">
-          <img src="Images/BladeRunnerTrailer.jpg" alt="Blade Runner Trailer" height= 240 width=360 id ="BRtrailer">
-
+        <div class="col-lg-4 col-md-4 mt-2 mb-2">
+          <div id="player"></div>
         </div>
-        <div class="col-md-4 mt-2 mb-2">
-          <img src="Images/BladeRunnerPoster.png" alt="Blade Runner Trailer" height= 240 width=180 id ="BRposter">
+        <div class="col-lg-3 col-md-4 mt-2 mb-2">
+          <img id ="BRposter" src="Images/BladeRunnerPoster.png" alt="Blade Runner Trailer" height= 240 width=180 style="margin-right: -20px" >
         </div>
-        <div class="col-md-6 text-center">
-            <h3>MOVIE TITLE HERE</h3>
-            <p>Rating</p>
-            <p>Description</p>
+        <div class="col-lg-5 col-md-4">
+          <div class="row">
+            <div class="col-md-10 col-sm-12" style="margin-right: -20px">
+              <h3 id="title" class="mb-0" >MOVIE TITLE HERE</h3>
+            </div>
+            <div class="col-md-2 col-sm-12 mt-1"  style="margin-left: -10px" >
+              <img src="Images/Star.png" class="mt-1" alt="Stars" height=20 width=20>
+              <h4 id="stars" class="mb-0">8.0</h4>
+            </div>
+          </div>
+          <div class="row mt-1" style=" margin-right: 40px">
+            <div class="col-md-12">
+              <small id="maturity">R</small>
+              <small> |</small>
+              <small id="runtime">2h 44min</small>
+              <small> |</small>
+              <small id="genre">SCI-FI, Thriller</small>
+              <small> |</small>
+              <small id="year">(2017)</small>
+            </div>
+          </div>
+          <div id="plot" class="row mt-1" style=" margin-right: 40px">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+          </div>
         </div>
       </div>
     </div>

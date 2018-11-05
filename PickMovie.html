@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet"href="PickMovie.css">
+    <!-- Axios CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class= "text-center">
       <h1> Pick Movie </h1>
-      <button type="button" class="go">GO!</button>
+      <button id= "GO" type="submit" class="go">GO!</button>
     </div>
-    <div class="container text-center" id= "button container">
+    <div class="container text-center" id="buttonContainer">
       <div class="row">
         <div class="col-md-12 ">
           <button type="button" class="genre">ACTION</button>
@@ -44,8 +46,13 @@
     </div>
     <div class="container bg-transluscent text-center">
       <div class="row">
-        <div class="col-lg-4 col-md-4 mt-2 mb-2">
-          <div id="player"></div>
+        <div class="col-lg-4 col-md-4 mt-2 mb-2 ">
+          <iframe id="player"
+            width="375" height="240"
+            src="https://www.youtube.com/embed/gCcx85zbxz4?enablejsapi=1"
+            frameborder="0"
+            style="border: solid 4px #37474F"
+          ></iframe>
         </div>
         <div class="col-lg-3 col-md-4 mt-2 mb-2">
           <img id ="BRposter" src="Images/BladeRunnerPoster.png" alt="Blade Runner Trailer" height= 240 width=180 style="margin-right: -20px" >
@@ -60,7 +67,7 @@
               <h4 id="stars" class="mb-0">8.0</h4>
             </div>
           </div>
-          <div class="row mt-1" style=" margin-right: 40px">
+          <div class="row mt-1" style=" margin-right: 40px" class="info">
             <div class="col-md-12">
               <small id="maturity">R</small>
               <small> |</small>

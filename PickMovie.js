@@ -1,3 +1,41 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+  let selectedGenre = "Action"
+  let trailerId = 'urRVZ4SW7WU'
+  let moviePoster = document.querySelector("#BRposter")
+  let movieTitle = document.querySelector("#title")
+  let movieYear = document.querySelector("#year")
+
+  let buttons = document.querySelectorAll("#buttonContainer button")
+  for(let button of buttons){
+    button.addEventListener('click', ()=>{
+      buttons.forEach((btn)=>{btn.classList = "genre"})
+      selectedGenre = button.innerText
+      button.classList = "selected"
+    })
+  }
+
+  function suggestMovie(genre) {
+    axios.get('http://www.omdbapi.com?apikey=8cc4a7e0&s='+genre)
+      .then((response) => {
+        let movies = response.data.Search
+        moviePoster.src = movies[0].Poster
+        movieTitle.innerText = movies[0].Title
+        movieYear.innerText = movies[0].Year
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  let goButton = document.querySelector("#GO")
+  goButton.addEventListener('click', ()=>{
+    suggestMovie(selectedGenre)
+    document.querySelector("#player").src = `https://www.youtube.com/embed/${trailerId}?enablejsapi=1`
+  })
+
+});
+
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
@@ -12,7 +50,7 @@
         player = new YT.Player('player', {
           height: '240',
           width: '360',
-          videoId: 'urRVZ4SW7WU',
+          videoId: 'gCcx85zbxz4',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange

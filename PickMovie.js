@@ -20,30 +20,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
     })
   }
 
-  function suggestMovie(genre) {
-    axios.get('http://www.omdbapi.com?apikey=8cc4a7e0&s='+genre) //+'&type=movie' for filtering 
+  let suggestMovie = genre =>{
+    axios.get('http://www.omdbapi.com?apikey=8cc4a7e0&s='+genre)
       .then((response) => {
         let movies = response.data.Search
         let randomIndex = Math.floor(Math.random() * 10)
-        suggestedMovie = movies[randomIndex].Title
+        suggestedMovie = movies[randomIndex].Title.replace(/ :&-/, "")
+        movieTitle.innerText = movies[randomIndex].Title
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  let getMovieInfo = () =>{
+  axios.get('http://www.omdbapi.com?apikey=8cc4a7e0&t='+movieTitle.innerText)
+    .then((response) => {
+      let movieInfo = response.data
+      moviePoster.src = movieInfo.Poster
+      movieYear.innerText = movieInfo.Year
+      movieRating.innerText = movieInfo.imdbRating
+      movieMaturity.innerText = movieInfo.Rated
+      movieRuntime.innerText = movieInfo.Runtime
+      movieGenre.innerText = movieInfo.Genre
+      moviePlot.innerText = movieInfo.Plot
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  let getTrailer = () =>{
+    axios.get(`https://www.googleapis.com/youtube/v3/search?key=&q=${suggestedMovie}officialtrailer&part=snippet,id&order=date&maxResults=1`)
+      .then((response) => {
+        trailerId = response.data.items[0].id.videoId
         console.log(response)
-        console.log(suggestedMovie)
-        axios.get('http://www.omdbapi.com?apikey=8cc4a7e0&t='+suggestedMovie)
-          .then((response) => {
-            let movieInfo = response.data
-            moviePoster.src = movieInfo.Poster
-            movieTitle.innerText = movieInfo.Title
-            movieYear.innerText = movieInfo.Year
-            movieRating.innerText = movieInfo.imdbRating
-            movieMaturity.innerText = movieInfo.Rated
-            movieRuntime.innerText = movieInfo.Runtime
-            movieGenre.innerText = movieInfo.Genre
-            moviePlot.innerText = movieInfo.Plot
-            console.log(response)
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        document.querySelector("#player").src = `https://www.youtube.com/embed/${trailerId}?enablejsapi=1`
       })
       .catch((error) => {
         console.log(error)
@@ -53,15 +66,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let goButton = document.querySelector("#GO")
   goButton.addEventListener('click', ()=>{
     suggestMovie(selectedGenre)
-    axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyBBUEVDoq-VdrHTRZXf8fMIXzDnS3dXIbY&q=${suggestedMovie}official&part=snippet,id&order=date&maxResults=1`)
-      .then((response) => {
-        trailerId = response.data.items[0].id.videoId
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    document.querySelector("#player").src = `https://www.youtube.com/embed/${trailerId}?enablejsapi=1`
+    setTimeout(getTrailer, 150)
+    setTimeout(getMovieInfo, 200)
   })
 
 });

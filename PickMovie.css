@@ -1,6 +1,6 @@
 body {
    background-image: url("Images/empty-movie-theater.jpg");
-   background-color: #000000 ;
+   background-color: #2d0c0e ;
    height: 800px;
    background-repeat: no-repeat;
    background-size: cover;
@@ -14,8 +14,13 @@ h1 {
 
 }
 
-h2,h3,h4,p,small {
+h2,h3,h4 {
    color: white;
+}
+
+p,small {
+   color: white;
+   font-size: 1em;
 }
 
 a {
@@ -52,9 +57,17 @@ a {
    font-size: 1.25rem;
 }
 
+.emailForm{
+  background-color: Transparent;
+  color: white;
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
 .favorite {
    color: white;
-   padding: 0;
+   padding: .5em;
    border: none;
    background: none;
    font-size: 3rem;
@@ -101,4 +114,48 @@ a {
 
 .bg-transluscent {
   background:rgba(255,255,255,0.5);
+  border-radius: 10px;
+}
+
+.plotRow{
+  margin: 10%;
+}
+
+
+@media (max-width: 767.98px) {
+  .go {
+     font-size: 3rem;
+  }
+  .genre {
+     font-size: 1.2rem;
+  }
+  .favorite {
+      margin: -1rem;
+  }
+
+
+}
+
+@media (min-width: 900px) {
+  .plotRow{
+    margin-right: 10%;
+  }
+
+  .Title{
+    margin-left: 10%;
+    margin-right: -9%;
+    margin-bottom: -3%;
+  }
+  .titleBox{
+    margin-left: -2%;
+  }
+
+  .Player {
+   margin-right: 2%
+  }
+
+  .favorite {
+      margin: -15px;
+      padding: -15px;
+  }
 }

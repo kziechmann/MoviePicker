@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   let suggestedMovie = "FreeSolo"
   let selectedGenre = "99"
+
   let moviePoster = document.querySelector("#poster")
   let movieTitle = document.querySelector("#title")
   let movieYear = document.querySelector("#year")
@@ -10,9 +11,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let movieGenre = document.querySelector("#genre")
   let moviePlot = document.querySelector("#plot")
   let movieWebsite = document.querySelector("#website")
-  let favoriteButton = document.querySelector("#Favorite")
-  let favoriteNum = 1
 
+  let favoriteNum = 1
+  let favoriteButton = document.querySelector("#Favorite")
+  let unFavoriteButton = document.querySelector("#unFavorite")
+
+  let emailForm = document.querySelector("#emailForm")
+  let emailInput = document.querySelector("#emailInput")
+  let emailBody = document.querySelector("#emailBody")
+  let sendEmailButton = document.querySelector("#sendButton")
+
+  sendEmailButton.addEventListener('click', ()=>{
+    emailForm.action = `mailto:${emailInput.value}?&subject=PickMovie`
+    emailBody.value = decodeURIComponent(`Movie_Title:${movieTitle.innerText},Year:${movieYear.innerText},Rating:${movieRating.innerText},Genre:${movieGenre.innerText},Runtime:${movieRuntime.innerText},Plot:${moviePlot.innerText},Website:${movieWebsite.href}`)
+  })
 
   // Create Genre Buttons
   let buttons = document.querySelectorAll("#buttonContainer button")
@@ -83,12 +95,41 @@ document.addEventListener('DOMContentLoaded', (event) => {
       localStorage.setItem('favoriteMovie1', JSON.stringify(favoriteMovie1))
     } else if (favoriteNum === 2) {
       let favoriteMovie2 = {}
-      favoriteNum = 1
+      favoriteNum = 3
       document.querySelector("#fbutton2").style = ""
       storeFavoriteInfo(favoriteMovie2)
       localStorage.setItem('favoriteMovie2', JSON.stringify(favoriteMovie2))
+    } else if (favoriteNum === 3) {
+      let favoriteMovie3 = {}
+      favoriteNum = 4
+      document.querySelector("#fbutton3").style = ""
+      storeFavoriteInfo(favoriteMovie3)
+      localStorage.setItem('favoriteMovie3', JSON.stringify(favoriteMovie3))
+    } else if (favoriteNum === 4) {
+      let favoriteMovie4 = {}
+      favoriteNum = 1
+      document.querySelector("#fbutton4").style = ""
+      storeFavoriteInfo(favoriteMovie4)
+      localStorage.setItem('favoriteMovie4', JSON.stringify(favoriteMovie4))
     }
   })
+
+  unFavoriteButton.addEventListener('click', ()=>{
+    if (favoriteNum === 1) {
+      document.querySelector("#fbutton1").style = "display: none;"
+      localStorage.setItem('favoriteMovie1', JSON.stringify({}))
+    } else if (favoriteNum === 2) {
+      document.querySelector("#fbutton2").style = "display: none;"
+      localStorage.setItem('favoriteMovie2', JSON.stringify({}))
+    } else if (favoriteNum === 3) {
+      document.querySelector("#fbutton3").style = "display: none;"
+      localStorage.setItem('favoriteMovie3', JSON.stringify({}))
+    } else if (favoriteNum === 4) {
+      document.querySelector("#fbutton4").style = "display: none;"
+      localStorage.setItem('favoriteMovie4', JSON.stringify({}))
+    }
+  })
+
 
   let storeFavoriteInfo = function(favMovieObj){
     favMovieObj["movieTitle"] = movieTitle.innerText
@@ -107,13 +148,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Retrieving favorites from local storage
   let favorite1 = document.querySelector("#fbutton1")
   favorite1.addEventListener('click', ()=>{
+    favoriteNum = 1
     let favMovie = JSON.parse(localStorage.getItem('favoriteMovie1'))
     updateFromFavoriteInfo(favMovie)
   })
 
   let favorite2 = document.querySelector("#fbutton2")
   favorite2.addEventListener('click', ()=>{
+    favoriteNum = 2
     let favMovie = JSON.parse(localStorage.getItem('favoriteMovie2'))
+    updateFromFavoriteInfo(favMovie)
+  })
+
+  let favorite3 = document.querySelector("#fbutton3")
+  favorite3.addEventListener('click', ()=>{
+    favoriteNum = 3
+    let favMovie = JSON.parse(localStorage.getItem('favoriteMovie3'))
+    updateFromFavoriteInfo(favMovie)
+  })
+
+  let favorite4 = document.querySelector("#fbutton4")
+  favorite4.addEventListener('click', ()=>{
+    favoriteNum = 4
+    let favMovie = JSON.parse(localStorage.getItem('favoriteMovie4'))
     updateFromFavoriteInfo(favMovie)
   })
 
@@ -149,7 +206,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let suggestMovie = genre =>{
     axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8bc80cb92717ca1f3194282f05980aa7&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&vote_count.gte=30&vote_average.gte=7&with_genres=${selectedGenre}`)
       .then((response) => {
-        console.log("suggestMovie from tmdb >>>>",response)
         let movies = response.data.results
         let randomIndex = Math.floor(Math.random() * 19)
         suggestedMovie = movies[`${randomIndex}`].title
@@ -187,7 +243,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let cleanedUpTitle = cleanTitle(suggestedMovie)
     axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyBBUEVDoq-VdrHTRZXf8fMIXzDnS3dXIbY&q=${cleanedUpTitle}OfficialTrailer&part=snippet,id&order=relevance&maxResults=1`)
       .then((response) => {
-        console.log("getTrailer from Youtube >>>>",response)
         let trailerId = response.data.items[0].id.videoId
         document.querySelector("#player").src = `https://www.youtube.com/embed/${trailerId}?enablejsapi=1`
       })
@@ -201,4 +256,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
     suggestMovie(selectedGenre)
   })
 
+  // if (localStorage['favoriteMovie1']) {
+  //   document.querySelector("#fbutton1").style = ""
+  //   let favMovie = JSON.parse(localStorage.getItem('favoriteMovie1'))
+  //   updateFromFavoriteInfo(favMovie)
+  // }
+  //
+  // if (localStorage['favoriteMovie2']) {
+  //   document.querySelector("#fbutton2").style = ""
+  //   let favMovie = JSON.parse(localStorage.getItem('favoriteMovie2'))
+  //   updateFromFavoriteInfo(favMovie)
+  // }
+  //
+  // if (localStorage['favoriteMovie3']) {
+  //   document.querySelector("#fbutton3").style = ""
+  //   let favMovie = JSON.parse(localStorage.getItem('favoriteMovie3'))
+  //   updateFromFavoriteInfo(favMovie)
+  // }
+  //
+  // if (localStorage['favoriteMovie4']) {
+  //   document.querySelector("#fbutton4").style = ""
+  //   let favMovie = JSON.parse(localStorage.getItem('favoriteMovie4'))
+  //   updateFromFavoriteInfo(favMovie)
+  // }
 });
